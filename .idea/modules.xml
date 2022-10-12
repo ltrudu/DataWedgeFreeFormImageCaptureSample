@@ -3,10 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/DataWedgeFreeFormImageCaptureSample.iml" filepath="$PROJECT_DIR$/.idea/modules/DataWedgeFreeFormImageCaptureSample.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/DataWedgeFreeFormImageCaptureSample.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/DataWedgeFreeFormImageCaptureSample.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/DataWedgeFreeFormImageCaptureSample.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/DataWedgeFreeFormImageCaptureSample.app.androidTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/DataWedgeFreeFormImageCaptureSample.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/DataWedgeFreeFormImageCaptureSample.app.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/DataWedgeFreeFormImageCaptureSample.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/DataWedgeFreeFormImageCaptureSample.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DataWedgeFreeFormImageCaptureSample/DataWedgeFreeFormImageCaptureSample.DataWedgeFreeFormImageCaptureSample.iml" filepath="$PROJECT_DIR$/.idea/modules/DataWedgeFreeFormImageCaptureSample/DataWedgeFreeFormImageCaptureSample.DataWedgeFreeFormImageCaptureSample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DataWedgeFreeFormImageCaptureSample/DataWedgeFreeFormImageCaptureSample.DataWedgeFreeFormImageCaptureSample.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/DataWedgeFreeFormImageCaptureSample/DataWedgeFreeFormImageCaptureSample.DataWedgeFreeFormImageCaptureSample.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DataWedgeFreeFormImageCaptureSample/DataWedgeFreeFormImageCaptureSample.DataWedgeFreeFormImageCaptureSample.main.iml" filepath="$PROJECT_DIR$/.idea/modules/DataWedgeFreeFormImageCaptureSample/DataWedgeFreeFormImageCaptureSample.DataWedgeFreeFormImageCaptureSample.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DataWedgeFreeFormImageCaptureSample/DataWedgeFreeFormImageCaptureSample.DataWedgeFreeFormImageCaptureSample.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/DataWedgeFreeFormImageCaptureSample/DataWedgeFreeFormImageCaptureSample.DataWedgeFreeFormImageCaptureSample.unitTest.iml" />
     </modules>
   </component>
 </project>

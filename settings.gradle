@@ -16,4 +16,4 @@ dependencyResolutionManagement {
 
 
 rootProject.name = "DataWedgeFreeFormImageCaptureSample"
-include ':app'
+include ':DataWedgeFreeFormImageCaptureSample'
