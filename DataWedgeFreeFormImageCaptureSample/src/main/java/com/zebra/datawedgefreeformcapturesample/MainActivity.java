@@ -85,10 +85,29 @@ public class MainActivity extends AppCompatActivity {
         intentFilter.addAction(IntentKeys.INTENT_OUTPUT_ACTION);
         intentFilter.addCategory(Intent.CATEGORY_DEFAULT);
         registerReceiver(broadcastReceiver, intentFilter);
+        registerUnregisterForNotifications(true, "WORKFLOW_STATUS");
+        registerUnregisterForNotifications(true, "SCANNER_STATUS");
     }
 
     private void unRegisterReceivers(){
+        registerUnregisterForNotifications(false, "WORKFLOW_STATUS");
+        registerUnregisterForNotifications(false, "SCANNER_STATUS");
         unregisterReceiver(broadcastReceiver);
+    }
+
+    void registerUnregisterForNotifications(boolean register, String type) {
+        Bundle b = new Bundle();
+        b.putString("com.symbol.datawedge.api.APPLICATION_NAME", getPackageName());
+        b.putString("com.symbol.datawedge.api.NOTIFICATION_TYPE", type);
+        Intent i = new Intent();
+        i.putExtra("APPLICATION_PACKAGE", getPackageName());
+        i.setAction("com.symbol.datawedge.api.ACTION");
+        i.setPackage("com.symbol.datawedge");
+        if (register)
+            i.putExtra("com.symbol.datawedge.api.REGISTER_FOR_NOTIFICATION", b);
+        else
+            i.putExtra("com.symbol.datawedge.api.UNREGISTER_FOR_NOTIFICATION", b);
+        this.sendBroadcast(i);
     }
 
     public void onCreateProfile(View view){
@@ -290,6 +309,23 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                     thread.start();
+                }
+                else if(action.equals("com.symbol.datawedge.api.NOTIFICATION_ACTION"))
+                {
+                    if (intent.hasExtra("com.symbol.datawedge.api.NOTIFICATION")) {
+                        Bundle b = intent.getBundleExtra("com.symbol.datawedge.api.NOTIFICATION");
+                        String NOTIFICATION_TYPE = b.getString("NOTIFICATION_TYPE");
+                        if (NOTIFICATION_TYPE != null) {
+                            switch (NOTIFICATION_TYPE) {
+                                case "WORKFLOW_STATUS":
+                                case "SCANNER_STATUS":
+
+                                    String status = b.getString("STATUS");
+                                    setStatus("Status: " + status);
+                                    break;
+                            }
+                        }
+                    }
                 }
             }catch (Exception ex){
                 Log.e(TAG, "onReceive: ", ex);
