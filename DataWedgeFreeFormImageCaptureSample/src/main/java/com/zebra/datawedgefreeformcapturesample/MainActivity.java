@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -12,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,8 +26,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -369,12 +375,15 @@ public class MainActivity extends AppCompatActivity {
                         final ImageView img = new ImageView(getApplicationContext());
                         img.setImageBitmap(bitmap);
                         setUIForResult(null, img);
+                        setImageLongPressListener(bitmap, img);
                         setStatus("Image decoding successful.");
                     }
                 }
             }
         }
     }
+
+
 
     @SuppressLint("Range")
     private byte[] processUri(String uri)
@@ -457,4 +466,39 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void setImageLongPressListener(final Bitmap imageBitmap, final ImageView img) {
+        img.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                File f = null;
+                OutputStream outputStream = null;
+                try {
+                    ContentValues values = new ContentValues();
+                    values.put(MediaStore.Images.Media.TITLE, "title");
+                    values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+                    Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                            values);
+                    outputStream = getContentResolver().openOutputStream(uri);
+                    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                    outputStream.close();
+
+                    Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                    sharingIntent.setType("image/jpeg");
+                    sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
+                    startActivity(Intent.createChooser(sharingIntent, "Share image"));
+                    outputStream.close();
+                    return true;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    if (outputStream != null) {
+                        try {
+                            outputStream.close();
+                        } catch (IOException ex) {
+                        }
+                    }
+                }
+                return false;
+            }
+        });
+    }
 }
